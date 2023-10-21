@@ -3,9 +3,14 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
 import Image from "next/image";
+import { LoginLink, getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 
 
 export default function Home() {
+
+  const { getUser } = getKindeServerSession();
+  const user = getUser();
+
   return (
     <>
       <MaxWidthWrapper className="mb-12 mt-28 sm:mt-14 flex flex-col items-center justify-center text-center">
@@ -14,9 +19,15 @@ export default function Home() {
         </div>
         <h1 className="max-w-4xl text-5xl font-bold md:text-6xl lg:text-7xl">Chat with your <span className="text-blue-600">documents</span> in seconds.</h1>
         <p className="mt-5 max-w-prose text-zinc-700 sm:text-xl">DocHelper allows you to have conversations with any PDF document. Simply upload your file and start asking questions right away.</p>
-        <Link className={buttonVariants({ size: 'lg', className: 'mt-5' })} href='/dashboard'>
-          Get Started <ArrowRight className="ml-2 h-5 w-5" />
-        </Link>
+        {!user || !user.id ? (
+          <LoginLink className={buttonVariants({ size: 'lg', className: 'mt-5' })}>
+            Get Started <ArrowRight className="ml-2 h-5 w-5" />
+          </LoginLink>
+        ) : (
+          <Link className={buttonVariants({ size: 'lg', className: 'mt-5' })} href='/dashboard'>
+            Head to the Dashboard <ArrowRight className="ml-2 h-5 w-5" />
+          </Link>
+        )}
       </MaxWidthWrapper >
       <div>
         <div className="relative isolate">
