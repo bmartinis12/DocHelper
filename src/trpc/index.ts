@@ -7,6 +7,7 @@ import { INFINITE_QUERY_LIMIT } from '@/config/infinite-query';
 import { absoluteUrl } from '@/lib/untils';
 import { getUserSubscriptionPlan, stripe } from '@/lib/stripe';
 import { PLANS } from '@/config/stripe';
+import { pinecone } from '@/lib/pinecone';
 
 export const appRouter = router({
     authCallback: publicProcedure.query(async () => {
@@ -71,8 +72,13 @@ export const appRouter = router({
             },
         })
 
-        if (!file)
-            throw new TRPCError({ code: 'NOT_FOUND' })
+        if (!file) throw new TRPCError({ code: 'NOT_FOUND' })
+
+        await db.message.deleteMany({
+            where: {
+                fileId: input.id
+            }
+        });
 
         await db.file.delete({
             where: {

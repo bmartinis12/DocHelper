@@ -49,7 +49,7 @@ const UploadDropzone = ({ isSubscribed }: { isSubscribed: boolean }) => {
 
     return (
         <Dropzone multiple={false} onDrop={async (acceptedFile) => {
-            /*setIsUploading(true);
+            setIsUploading(true);
             const progressInterval = startSimulatedProgress();
 
             const res = await startUpload(acceptedFile);
@@ -79,7 +79,7 @@ const UploadDropzone = ({ isSubscribed }: { isSubscribed: boolean }) => {
             clearInterval(progressInterval);
             setUploadProgress(100);
 
-            startPolling({ key }); */
+            startPolling({ key });
         }} >
             {({ getRootProps, getInputProps, acceptedFiles }) => (
                 <div {...getRootProps()} className="border h-64 m-4 border-dashed border-gray-300 rounded-lg overflow-auto">
