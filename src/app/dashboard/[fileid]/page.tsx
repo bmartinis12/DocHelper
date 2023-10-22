@@ -35,7 +35,7 @@ const Page = async ({ params }: PageProps) => {
                         <PdfRenderer url={file.url} />
                     </div>
                 </div>
-                <div className="shrink-0 border-t border-gray-200 lg:w-96 lg:border-l lg:border-t-0 flex-[0.75]">
+                <div className="shrink-0 border-t border-gray-200 lg:max-w-[35%] lg:w-96 lg:border-l lg:max-w- lg:border-t-0 flex-[0.75]">
                     <ChatWrapper fileId={fileid} />
                 </div>
             </div>

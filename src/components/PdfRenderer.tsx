@@ -57,8 +57,8 @@ const PdfRenderer = ({ url }: PdfRenderProps) => {
     }
 
     return (
-        <div className="w-full bg-white rounded-md shadow flex flex-col items-center">
-            <div className="h-14 w-full border-b border-zinc-200 flex items-center justify-between px-2">
+        <div className="w-full overflow-hidden bg-white rounded-md shadow flex flex-col items-center">
+            <div className="h-content sm:h-14 w-full border-b border-zinc-200 flex flex-col sm:flex-row items-center justify-between px-2">
                 <div className="flex items-center gap-1.5">
                     <Button variant='ghost' aria-label='previous page'
                         onClick={() => {
@@ -85,7 +85,7 @@ const PdfRenderer = ({ url }: PdfRenderProps) => {
                         <ChevronUp className='h-4 w-4' />
                     </Button>
                 </div>
-                <div className="space-x-2">
+                <div className="space-x-2 flex justify-evenly w-full sm:flex-none sm:w-auto">
                     <DropdownMenu>
                         <DropdownMenuTrigger asChild>
                             <Button className='gap-1.5' aria-label='zoom' variant='ghost'>

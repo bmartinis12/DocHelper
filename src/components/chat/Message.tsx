@@ -37,7 +37,7 @@ const Message = forwardRef<HTMLDivElement, MessageProps>(({ message, isNextMessa
                     'rounded-bl-none': !isNextMessageSamePerson && !message.isUserMessage
                 })}>
                     {typeof message.text === 'string' ? (
-                        <ReactMarkdown className={cn('prose', {
+                        <ReactMarkdown className={cn('prose text-sm sm:text-base', {
                             'text-zinc-50': message.isUserMessage
                         })}>
                             {message.text}
