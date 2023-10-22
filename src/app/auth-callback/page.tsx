@@ -18,7 +18,7 @@ const AuthCallback = () => {
         },
         onError: (err) => {
             if (err.data?.code === 'UNAUTHORIZED' || err.data?.code === 'INTERNAL_SERVER_ERROR') {
-                router.push('/auth-callback/sign-in')
+                router.push('/sign-in')
             }
         },
         retry: 5,

@@ -1,4 +1,4 @@
-import { cn } from '@/lib/untils'
+import { cn, constructMetaData } from '@/lib/untils'
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
@@ -10,10 +10,7 @@ import 'simplebar-react/dist/simplebar.min.css';
 
 const inter = Inter({ subsets: ['latin'] })
 
-export const metadata: Metadata = {
-  title: 'DocHelper',
-  description: 'Use AI to communicate with your document',
-}
+export const metadata = constructMetaData();
 
 export default function RootLayout({
   children,

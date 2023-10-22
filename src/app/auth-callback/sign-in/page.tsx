@@ -1,7 +1,13 @@
-import { LoginLink } from "@kinde-oss/kinde-auth-nextjs/server";
+import { LoginLink, getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { buttonVariants } from "@/components/ui/button";
+import { redirect } from "next/navigation";
 
 const SignIn = () => {
+    const { getUser } = getKindeServerSession();
+    const user = getUser();
+
+    if (user) redirect('/dashboard');
+
     return (
         <div className="w-full mt-24 flex justify-center">
             <div className="flex flex-col items-center gap-2">

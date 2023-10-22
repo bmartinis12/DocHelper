@@ -11,11 +11,12 @@ import { useToast } from "./ui/use-toast";
 import { trpc } from "@/app/_trpc/client";
 import { useRouter } from "next/navigation";
 
-const UploadDropzone = () => {
+const UploadDropzone = ({ isSubscribed }: { isSubscribed: boolean }) => {
     const router = useRouter();
 
     const [isUploading, setIsUploading] = useState(false);
     const [uploadProgress, setUploadProgress] = useState(0);
+
     const startSimulatedProgress = () => {
         setUploadProgress(0);
 
@@ -34,7 +35,9 @@ const UploadDropzone = () => {
 
     const { toast } = useToast();
 
-    const { startUpload } = useUploadThing('pdfUploader');
+    const { startUpload } = useUploadThing(
+        isSubscribed ? 'proPlanUploader' : 'freePlanUploader'
+    );
 
     const { mutate: startPolling } = trpc.getFile.useMutation({
         onSuccess: (file) => {
@@ -85,7 +88,7 @@ const UploadDropzone = () => {
                             <div className="flex flex-col items-center justify-center pt-5 pb-6">
                                 <Cloud className="h-6 w-6 text-zinc-500 mb-2 animate-bounce" />
                                 <p className="mb-2 text-sm text-zinc-700"><span className="font-semibold">Click to upload</span> or drag or drop</p>
-                                <p className="text-xs text-zinc-500">PDF (up to 4MB)</p>
+                                <p className="text-xs text-zinc-500">PDF (up to {isSubscribed ? '16' : '4'}mb)</p>
                             </div>
                             {acceptedFiles && acceptedFiles[0] ? (
                                 <div className="max-w-xs bg-white flex items-center rounded-md overflow-hidden outline outline-[1px] outline-zinc-200 divide-x divide-zinc-200">
@@ -117,7 +120,7 @@ const UploadDropzone = () => {
     )
 }
 
-const UploadButton = () => {
+const UploadButton = ({ isSubscribed }: { isSubscribed: boolean }) => {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
@@ -130,7 +133,7 @@ const UploadButton = () => {
                 <Button>Upload PDF</Button>
             </DialogTrigger>
             <DialogContent>
-                <UploadDropzone />
+                <UploadDropzone isSubscribed={isSubscribed} />
             </DialogContent>
         </Dialog>
     )
